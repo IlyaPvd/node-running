@@ -1,6 +1,14 @@
 #!/bin/bash
 
-# Clone project repository
+# Install dependencies for building from source
+sudo apt update
+sudo apt install -y curl git jq lz4 build-essential
+
+# Install Go
+sudo rm -rf /usr/local/go
+curl -L https://go.dev/dl/go1.21.6.linux-amd64.tar.gz | sudo tar -xzf - -C /usr/local
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile
+source .bash_profile
 
 # Check args
 if [ "$#" -ne 2 ]; then
@@ -12,6 +20,7 @@ PREFIX=$1
 NODE_NAME=$2
 
 
+# Clone project repository
 cd && rm -rf babylon
 git clone https://github.com/babylonchain/babylon
 cd babylon
