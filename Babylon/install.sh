@@ -1,7 +1,6 @@
 #!/bin/bash
 
-DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
-
+sudo sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" /etc/needrestart/needrestart.conf
 
 # Install dependencies for building from source
 sudo apt update
@@ -35,7 +34,7 @@ make install
 # Set node CLI configuration
 babylond config chain-id bbn-test-2
 babylond config keyring-backend test
-babylond config node tcp://localhost:20657
+babylond config node tcp://localhost:${PREFIX}57
 
 # Initialize the node
 babylond init "$NODE_NAME" --chain-id bbn-test-2
