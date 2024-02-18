@@ -87,8 +87,6 @@ sudo systemctl start babylond.service
 sudo systemctl status babylond.service
 
 babylond keys add wallet >> wallet.txt
-echo "BABYLON_MONIKER=${NODE_NAME}" >> wallet.txt
-echo "PORT=${PREFIX}656" >> wallet.txt
 
 babylond create-bls-key $(babylond keys show wallet -a)
 
