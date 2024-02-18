@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+
 # Install dependencies for building from source
 sudo apt update
 sudo apt install -y curl git jq lz4 build-essential
