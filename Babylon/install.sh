@@ -59,8 +59,9 @@ sed -i 's|^network *=.*|network = "mainnet"|g' $HOME/.babylond/config/app.toml
 
 
 # Change ports
-sed -i -e "s%:1317%:${PREFIX}617%; s%:8080%:${PREFIX}680%; s%:9090%:${PREFIX}690%; s%:9091%:${PREFIX}691%; s%:8545%:${PREFIX}645%; s%:8546%:${PREFIX}646%; s%:6065%:${PREFIX}665%" $HOME/.babylond/config/app.toml
-sed -i -e "s%:26658%:${PREFIX}658%; s%:26657%:${PREFIX}657%; s%:6060%:${PREFIX}660%; s%:26656%:${PREFIX}656%; s%:26660%:${PREFIX}661%" $HOME/.babylond/config/config.toml
+
+sed -i -e "s%:1317%:${PREFIX}17%; s%:8080%:${PREFIX}80%; s%:9090%:${PREFIX}90%; s%:9091%:${PREFIX}91%; s%:8545%:${PREFIX}45%; s%:8546%:${PREFIX}46%; s%:6065%:${PREFIX}65%" $HOME/.babylond/config/app.toml
+sed -i -e "s%:26658%:${PREFIX}58%; s%:26657%:${PREFIX}57%; s%:6060%:${PREFIX}60%; s%:26656%:${PREFIX}56%; s%:26660%:${PREFIX}61%; s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${PREFIX}56\"%" $HOME/.babylond/config/config.toml
 
 # Download latest chain data snapshot
 curl "https://snapshots-testnet.nodejumper.io/babylon-testnet/babylon-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.babylond"
@@ -86,12 +87,12 @@ sudo systemctl enable babylond.service
 sudo systemctl start babylond.service
 sudo systemctl status babylond.service
 
-babylond keys add wallet >> wallet.txt
-echo "BABYLON_MONIKER=${NODE_NAME}" >> wallet.txt
-echo "PORT=${PREFIX}656" >> wallet.txt
+babylond keys add wallet >> ../wallet.txt 2>&1
+echo "BABYLON_MONIKER=${NODE_NAME}" >> ../wallet.txt
+echo "PORT=${PREFIX}56" >> ../wallet.txt
 
 babylond create-bls-key $(babylond keys show wallet -a)
 
-sudo systemctl restart babylon
+sudo systemctl restart babylond
 
 babylond keys list
