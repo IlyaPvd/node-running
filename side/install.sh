@@ -27,18 +27,18 @@ NODE_NAME=$2
 cd && rm -rf sidechain
 git clone https://github.com/sideprotocol/sidechain.git
 cd sidechain
-git checkout v0.6.0
+git checkout v0.7.0-rc2
 
 # Build binary
 make install
 
 # Set node CLI configuration
-sided config chain-id side-testnet-2
+sided config chain-id side-testnet-3
 sided config keyring-backend test
 sided config node tcp://localhost:${PREFIX}57
 
 # Initialize the node
-sided init "bronzebeard" --chain-id side-testnet-2
+sided init "bronzebeard" --chain-id side-testnet-3
 
 # Download genesis and addrbook files
 curl -L https://snapshots-testnet.nodejumper.io/side-testnet/genesis.json > $HOME/.side/config/genesis.json
